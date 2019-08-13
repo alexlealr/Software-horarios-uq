@@ -1,36 +1,58 @@
 package yesder.bolsadeideas.Springboot.web.app.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-@Entity
-@Table(name = "asignaturas")
-public class Asignatura {
 
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+public class Asignatura implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7684570809035513741L;
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+	@GenericGenerator(name="native", strategy="native")
 	private Long id;
-	@NotEmpty
+	
+	@Column
 	private String codigo;
-	@NotEmpty
+	@Column
 	private String nombre;
+	@Column
+	private int nivel;
+	@Column
+	private int tipoAsign;
 	@NotEmpty
-	private int numCreditos;
+	private int unidades;
+	@Column
+	private String activa;
 	@NotEmpty
-	private int numHorasSemestre;
+	private int opcionGrado;
 	@NotEmpty
-	private int codRequisito;
-	@NotEmpty
-	private int semestre;
+	private int tipoAct;
 	
 	
 	
 	public Asignatura() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getCodigo() {
 		return codigo;
@@ -44,34 +66,46 @@ public class Asignatura {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public int getNumCreditos() {
-		return numCreditos;
+	public int getNivel() {
+		return nivel;
 	}
-	public void setNumCreditos(int numCreditos) {
-		this.numCreditos = numCreditos;
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
 	}
-	public int getNumHorasSemestre() {
-		return numHorasSemestre;
+	public int getTipoAsign() {
+		return tipoAsign;
 	}
-	public void setNumHorasSemestre(int numHorasSemestre) {
-		this.numHorasSemestre = numHorasSemestre;
+	public void setTipoAsign(int tipoAsign) {
+		this.tipoAsign = tipoAsign;
 	}
-	public int getCodRequisito() {
-		return codRequisito;
+	public int getUnidades() {
+		return unidades;
 	}
-	public void setCodRequisito(int codRequisito) {
-		this.codRequisito = codRequisito;
+	public void setUnidades(int unidades) {
+		this.unidades = unidades;
 	}
-	public int getSemestre() {
-		return semestre;
+	public String getActiva() {
+		return activa;
 	}
-	public void setSemestre(int semestre) {
-		this.semestre = semestre;
+	public void setActiva(String activa) {
+		this.activa = activa;
 	}
-	
+	public int getOpcionGrado() {
+		return opcionGrado;
+	}
+	public void setOpcionGrado(int opcionGrado) {
+		this.opcionGrado = opcionGrado;
+	}
+	public int getTipoAct() {
+		return tipoAct;
+	}
+	public void setTipoAct(int tipoAct) {
+		this.tipoAct = tipoAct;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	private static final long serialVersionUID = 1L;
+	
+	
+	
 }

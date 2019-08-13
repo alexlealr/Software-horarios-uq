@@ -1,10 +1,17 @@
 package yesder.bolsadeideas.Springboot.web.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import yesder.bolsadeideas.Springboot.web.app.service.AsignaturaService;
 
 @Controller
 public class AppController {
+	
+	@Autowired
+	AsignaturaService asignaService;
 
 	@GetMapping({"/","/login"})
 	public String index() {
@@ -24,18 +31,14 @@ public class AppController {
 	public String user() {
 		return "user";
 	}
-	
-	@GetMapping("/registrarDocente")
-	public String registrarDocente() {
-		return "registrarDocente";
-	}
 
 	@GetMapping("/docente-form")
 	public String getDocenteForm() {
 		return "docente/docente-form";
 	}	
 	@GetMapping("/asignatura-form")
-	public String getAsiganturaForm() {
+	public String getAsiganturaForm(Model model) {
+		model.addAttribute("asignaturaList", asignaService.getAllUsers());
 		return "asignatura/asignatura-form";
 	}
 	@GetMapping("/fechas318_302")
