@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,20 +28,28 @@ public class Asignatura implements Serializable {
 	private Long id;
 	
 	@Column
+	@NotBlank
 	private String codigo;
 	@Column
+	@NotBlank
 	private String nombre;
 	@Column
+	@NotBlank
 	private int nivel;
 	@Column
+	@NotBlank
 	private int tipoAsign;
-	@NotEmpty
+	@Column
+	@NotBlank
 	private int unidades;
 	@Column
+	@NotBlank
 	private String activa;
-	@NotEmpty
+	@Column
+	@NotBlank
 	private int opcionGrado;
-	@NotEmpty
+	@Column
+	@NotBlank
 	private int tipoAct;
 	
 	

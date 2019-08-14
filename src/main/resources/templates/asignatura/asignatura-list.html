@@ -1,0 +1,38 @@
+<div class="table-responsive">
+	<table id="asignaturaList"
+		class="table table-bordered table-hover table-striped">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Código</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Nivel</th>
+				<th scope="col">Tipo de asignatura</th>
+				<th scope="col">Unidades</th>
+				<th scope="col">¿Activa?</th>
+				<th scope="col">Opción de grado</th>
+				<th scope="col">Tipo de actividad</th>
+				<th scope="col">Acciones</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="asignatura: ${asignaturaList}">
+				<td th:text="asignatura.id"></td>
+				<td th:text="asignatura.codigo"></td>
+				<td th:text="asignatura.nombre"></td>
+				<td th:text="asignatura.nivel"></td>
+				<td th:text="asignatura.tipoAsign"></td>
+				<td th:text="asignatura.unidades"></td>
+				<td th:text="asignatura.activa"></td>
+				<td th:text="asignatura.opcionGrado"></td>
+				<td th:text="asignatura.tipoAct"></td>
+
+				<td><a href="#" th:href="@{'/editAsig/'+ ${asignatura.id}}"><i
+						class="fas fa-edit"></i></a> | <a href="#"
+					th:onclick="'javascript:confirmDelete(\''+${asignatura.id} +'\');'"><i
+						class="fas fa-user-times"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
