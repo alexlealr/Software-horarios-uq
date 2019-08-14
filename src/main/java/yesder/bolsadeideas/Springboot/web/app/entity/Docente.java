@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -28,24 +29,37 @@ public class Docente implements Serializable {
 	private Long id;
 
 	
-	
+	@Column
 	private String nombre;
-	 
+	@Column
 	private String apellido;
-	 
+	@Column
 	private String identificacion;
-	 
+	@Column
 	private String limitHoras;
-	
+	@Column
 	private String telefono;
-	
+	@Column
 	private String estado;
-	private String asignatura;
+	@Column
 	private String ciudad;
+	@Column
+	@Email
 	private String correo;
 	
 	
-	
+	public Docente(String nombre, String apellido, String identificacion, String limitHoras, String telefono,
+			String estado, String ciudad, String correo) {
+		this.apellido = apellido;
+		this.ciudad = ciudad;
+		this.correo = correo;
+		this.estado = estado;
+		this.identificacion = identificacion;
+		this.limitHoras = limitHoras;
+		this.nombre =nombre;
+		this.telefono = telefono;
+		
+	}
 	
 	public Docente() {
 		super();
@@ -92,12 +106,6 @@ public class Docente implements Serializable {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-	public String getAsignatura() {
-		return asignatura;
-	}
-	public void setAsignatura(String asignatura) {
-		this.asignatura = asignatura;
 	}
 	public String getCiudad() {
 		return ciudad;
