@@ -25,7 +25,12 @@ public class ControladorCrudDocente {
 	@Autowired
     private DocenteRepository uc;
 	
-   
+	@GetMapping("/docente-form")
+	//@RequestMapping(value="/docente-form", method = RequestMethod.GET)
+    public String listaUsuarios(ModelMap mp){
+        mp.addAttribute("docentes", uc.findAll());
+        return "docente/docente-form";
+    }
 	//@GetMapping("/docente-form")
 //	@RequestMapping(value="/docente-form", method = RequestMethod.GET)
 //	@ResponseBody

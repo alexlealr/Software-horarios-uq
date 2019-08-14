@@ -9,3 +9,4 @@ import yesder.bolsadeideas.Springboot.web.app.entity.Docente;
 public interface DocenteRepository extends CrudRepository<Docente, Long> {
 
 }
+	
