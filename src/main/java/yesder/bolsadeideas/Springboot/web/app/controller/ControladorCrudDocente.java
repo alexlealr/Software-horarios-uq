@@ -31,6 +31,7 @@ public class ControladorCrudDocente {
         mp.addAttribute("docentes", uc.findAll());
         return "docente/docente-form";
     }
+	
 	//@GetMapping("/docente-form")
 //	@RequestMapping(value="/docente-form", method = RequestMethod.GET)
 //	@ResponseBody
@@ -39,27 +40,28 @@ public class ControladorCrudDocente {
 //        return "docente/docente-form";
 //    }
 // 
-//    @RequestMapping(value="/docente-form", method=RequestMethod.GET)
-//    public String nuevo(ModelMap mp){
-//        mp.put("docente", new Docente());
-//        return "/docente-form";
-//    }
+	@RequestMapping(value="/nuevo", method=RequestMethod.GET)
+    public String nuevo(ModelMap mp, BindingResult bindingResult){
+		 
+        mp.addAttribute("docente", new Docente());
+        
+        return "docente/docente-form";
+    }
    
 //   // @RequestMapping(value="", method = RequestMethod.GET)
 //	public String getDocenteForm(ModelMap mp) {
 //		return listaUsuarios(mp);
 //	}
-//    @RequestMapping(value="/docente-form", method=RequestMethod.POST)
-//    public String crear(@Valid Docente docente,
-//            BindingResult bindingResult, ModelMap mp){
-//        if(bindingResult.hasErrors()){
-//            return "docente/docente-form";
-//        }else{
-//            uc.save(docente);
-//            mp.put("docente", docente);
-//            return "docente/docente-form";
-//        }
-//    }
+    @RequestMapping(value="/docente-form", method=RequestMethod.POST)
+    public String crear(@Valid Docente docente, BindingResult bindingResult, ModelMap mp){
+        if(bindingResult.hasErrors()){
+            return "docente/docente-form";
+        }else{
+            uc.save(docente);
+            mp.addAttribute("docente", docente);
+            return listaUsuarios(mp);
+        }
+    }
 // 
 //    @RequestMapping(value="/docente-form", method = RequestMethod.POST)
 //    public String creado(@RequestParam("docente") Docente docente){
