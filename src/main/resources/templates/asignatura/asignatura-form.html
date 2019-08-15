@@ -1,63 +1,63 @@
-	<form class="form" role="form" autocomplete="off"
-		method="post">
+	<form class="form" role="form" autocomplete="off" th:object="${asignaturaForm}" th:action="@{/asignaturaForm}" method="post">
 		<div class="form-group row">
-			<label class="col-lg-3 col-form-label form-control-label">Código
+			<label class="col-lg-3 col-form-label form-control-label">Codigo
 			</label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
+				<input class="form-control" type="text" th:field="${asignaturaForm.codigo}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">Nombre
 			</label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
-				
+				<input class="form-control" type="text" th:field="${asignaturaForm.nombre}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">Nivel</label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
-				
+				<input class="form-control" type="text" th:field="${asignaturaForm.nivel}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('nivel')}" th:errors="*{nivel}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">Tipo
 				de asignatura </label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
-			
+				<input class="form-control" type="text" th:field="${asignaturaForm.tipoAsign}">
+			 <div class="alert-danger" th:if="${#fields.hasErrors('tipoAsign')}" th:errors="*{tipoAsign}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">Unidades</label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
-				
+				<input class="form-control" type="text" th:field="${asignaturaForm.unidades}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('unidades')}" th:errors="*{unidades}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">¿Activa?</label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
-			
+				<input class="form-control" type="text" th:field="${asignaturaForm.activa}">
+			<div class="alert-danger" th:if="${#fields.hasErrors('activa')}" th:errors="*{activa}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">Opcion
 				de grado</label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
-			
+				<input class="form-control" type="text" th:field="${asignaturaForm.opcionGrado}">
+			<div class="alert-danger" th:if="${#fields.hasErrors('opcionGrado')}" th:errors="*{opcionGrado}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">Tipo
 				de actividad</label>
 			<div class="col-lg-9">
-				<input class="form-control" type="text">
-				
+				<input class="form-control" type="text" th:field="${asignaturaForm.tipoAct}">
+				<div class="alert-danger" th:if="${#fields.hasErrors('tipoAct')}" th:errors="*{tipoAct}">Name Error</div>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -66,4 +66,5 @@
 				<input type="submit" class="btn btn-primary" value="Guardar">
 			</div>
 		</div>
+		<div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error MEssage</div>
 	</form>

@@ -34,22 +34,22 @@ public class Asignatura implements Serializable {
 	@NotBlank
 	private String nombre;
 	@Column
-	@NotBlank
+	@NotNull
 	private int nivel;
 	@Column
-	@NotBlank
+	@NotNull
 	private int tipoAsign;
 	@Column
-	@NotBlank
+	@NotNull
 	private int unidades;
 	@Column
 	@NotBlank
 	private String activa;
 	@Column
-	@NotBlank
+	@NotNull
 	private int opcionGrado;
 	@Column
-	@NotBlank
+	@NotNull
 	private int tipoAct;
 	
 	
@@ -58,8 +58,26 @@ public class Asignatura implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Asignatura(Long id, String codigo, String nombre, int nivel,
+			 int tipoAsign, int unidades, String activa, int opcionGrado,
+			@NotBlank int tipoAct) {
+		this.id = id;
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.nivel = nivel;
+		this.tipoAsign = tipoAsign;
+		this.unidades = unidades;
+		this.activa = activa;
+		this.opcionGrado = opcionGrado;
+		this.tipoAct = tipoAct;
+	}
+
 	public Asignatura(Long id) {
 		this.id=id;
+	}
+	public Asignatura(String codigo) {
+		this.codigo=codigo;
 	}
 	public Long getId() {
 		return id;

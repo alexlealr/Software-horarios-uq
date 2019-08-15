@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div class="table-responsive">
 	<table id="asignaturaList"
 		class="table table-bordered table-hover table-striped">
@@ -18,15 +20,15 @@
 		</thead>
 		<tbody>
 			<tr th:each="asignatura: ${asignaturaList}">
-				<td th:text="asignatura.id"></td>
-				<td th:text="asignatura.codigo"></td>
-				<td th:text="asignatura.nombre"></td>
-				<td th:text="asignatura.nivel"></td>
-				<td th:text="asignatura.tipoAsign"></td>
-				<td th:text="asignatura.unidades"></td>
-				<td th:text="asignatura.activa"></td>
-				<td th:text="asignatura.opcionGrado"></td>
-				<td th:text="asignatura.tipoAct"></td>
+				<td th:text="${asignatura.id}"/>
+				<td th:text="${asignatura.codigo}"/>
+				<td th:text="${asignatura.nombre}"/>
+				<td th:text="${asignatura.nivel}"/>
+				<td th:text="${asignatura.tipoAsign}"/>
+				<td th:text="${asignatura.unidades}"/>
+				<td th:text="${asignatura.activa}"/>
+				<td th:text="${asignatura.opcionGrado}"/>
+				<td th:text="${asignatura.tipoAct}"/>
 
 				<td><a href="#" th:href="@{'/editAsig/'+ ${asignatura.id}}"><i
 						class="fas fa-edit"></i></a> | <a href="#"
@@ -36,3 +38,4 @@
 		</tbody>
 	</table>
 </div>
+</html>
