@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +62,12 @@ public class ControladorCrudDocente {
             mp.addAttribute("docente", docente);
             return listaUsuarios(mp);
         }
+    }
+    @RequestMapping(value="/borrar/{id}", method=RequestMethod.GET)
+    public String borrar(@PathVariable("id") long id, ModelMap mp){
+        uc.deleteById(id);
+        mp.addAttribute("usuarios", uc.findAll());
+        return "docente/docente-form";
     }
 // 
 //    @RequestMapping(value="/docente-form", method = RequestMethod.POST)
