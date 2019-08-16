@@ -56,18 +56,19 @@ public class AsignaturaController {
 	    	return "asignatura/asignatura-view";
 	}
 	
-	/**
+	
 	@GetMapping("/editAsignatura/{id}")
-	public String getEditAsignaturaForm(Model model, @PathVariable(name ="id")String id)throws Exception{
-		Asignatura asigToEdit = asignaService.getAsignaturaByCod(id);
+	public String getEditAsignaturaForm(Model model, @PathVariable(name ="id")Long id)throws Exception{
+		Asignatura asigToEdit = asignaService.getAsignaturaById(id);
 
-		model.addAttribute("userForm", asigToEdit);
-		model.addAttribute("userList", asignaService.getAllUsers());
+		model.addAttribute("asignaturaForm", asigToEdit);
+		model.addAttribute("asignaturaList", asignaService.getAllUsers());
 		model.addAttribute("formTab","active");
 		model.addAttribute("editMode","true");
 
 		return "asignatura/asignatura-view";
 	}
+	
 
 	@PostMapping("/editAsignatura")
 	public String postEditAsignaturaForm(@Valid @ModelAttribute("asignaturaForm")Asignatura asig, BindingResult result, ModelMap model) {
@@ -94,8 +95,18 @@ public class AsignaturaController {
 
 	}
 
-	@GetMapping("/asignaturaForm/cancel")
+	@GetMapping("/editAsignatura/cancel")
 	public String cancelEditAsignatura(ModelMap model) {
-		return "redirect:/asignatura-form";
-	}*/
+		return "redirect:/asignaturaForm";
+	}
+	
+	@GetMapping("/deleteAsignatura/{id}")
+	public String deleteAsignatura(Model model, @PathVariable(name="id") Long id) {
+		try {
+			asignaService.deleteAsignatura(id);
+		} catch (Exception e) {
+			model.addAttribute("Error de eliminacion","La asignatura no puede ser eliminada");
+		}
+		return asignaturaForm(model);
+	}
 }

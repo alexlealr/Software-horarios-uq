@@ -37,26 +37,15 @@ public class AsignaturaServiceImpl implements AsignaturaService {
 	}
 
 	@Override
-	public Asignatura getAsignaturaByCod(String cod) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Asignatura updateAsignatura(Asignatura asig) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Asignatura getAsignaturaById(Long id) throws Exception {
+		return repository.findById(id).orElseThrow(() -> new Exception("El usuario para editar no existe."));
 	}
 	
-    /**
-	@Override
-	public Asignatura getAsignaturaByCod(String cod) throws Exception {
-		return repository.findByCodigo(cod).orElseThrow(() -> new Exception("El usuario para editar no existe."));
-	}
+    
 	
 	@Override
 	public Asignatura updateAsignatura(Asignatura fromUser) throws Exception {
-		Asignatura toAsignatura = getAsignaturaByCod(fromUser.getCodigo());
+		Asignatura toAsignatura = getAsignaturaById(fromUser.getId());
 		mapAsignatura(fromUser, toAsignatura);
 		return repository.save(toAsignatura);
 	}
@@ -66,6 +55,24 @@ public class AsignaturaServiceImpl implements AsignaturaService {
 	 * @param from
 	 * @param to
 	 */
+	protected void mapAsignatura(Asignatura from,Asignatura to) {
+		to.setCodigo(from.getCodigo());
+		to.setNombre(from.getNombre());
+		to.setNivel(from.getNivel());
+		to.setTipoAsign(from.getTipoAsign());
+		to.setUnidades(from.getUnidades());
+		to.setActiva(from.getActiva());
+		to.setOpcionGrado(from.getOpcionGrado());
+		to.setTipoAct(from.getTipoAct());
+	}
+
+	@Override
+	public void deleteAsignatura(Long id) throws Exception {
+		Asignatura asig = repository.findById(id).orElseThrow(() -> new Exception("Asignatura no encontrada -"+this.getClass().getName()));
+
+		repository.delete(asig);
+		
+	}
 	
 	
 	
