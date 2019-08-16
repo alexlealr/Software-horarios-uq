@@ -1,0 +1,40 @@
+<div class="table-responsive">
+	<table id="userList"
+		class="table table-bordered table-hover table-striped">
+			<thead class="thead-light">
+				<tr>
+											<th scope="col">#</th>
+											<th scope="col">Nombres</th>
+											<th scope="col">Apellidos</th>
+											<th scope="col">Identificación</th>
+											<th scope="col">Limite de horas</th>
+											<th scope="col">Télefono</th>
+											<th scope="col">Estado</th>
+											<th scope="col">Asignatura</th>
+											<th scope="col">Ciudad</th>
+											<th scope="col">Correo</th>
+											<th scope="col">Acciones</th>
+											<th></th>
+			</tr>
+			</thead>
+			<tbody>
+										<tr th:each="docente : ${docentes}">
+											<td th:text="${docente.id}"/>
+											<td th:text="${docente.nombre}"/>
+											<td th:text="${docente.apellido}"/>
+											<td th:text="${docente.identificacion}"/>
+											<td th:text="${docente.limitHoras}"/>
+											<td th:text="${docente.telefono}"/>
+											<td th:text="${docente.estado}"/>
+											<td th:text="${docente.ciudad}"/>
+											<td th:text="${docente.correo}"/>
+											
+									
+																				
+											<td><a href="#"><i class="fas fa-edit"></i></a> | <a
+												href="#"><i class="fas fa-user-times" th:action="@{/borrar/${docente.id}}"></i></a></td>
+										</tr>
+									
+			</tbody>
+	</table>
+</div>

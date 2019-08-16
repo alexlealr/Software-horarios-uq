@@ -65,45 +65,7 @@
 							<h4>Docentes</h4>
 						</div>
 						<div class="card-body">
-							<div class="table-responsive">
-								<table id="userList"
-									class="table table-bordered table-hover table-striped">
-									<thead class="thead-light">
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">Nombres</th>
-											<th scope="col">Apellidos</th>
-											<th scope="col">Identificación</th>
-											<th scope="col">Limite de horas</th>
-											<th scope="col">Télefono</th>
-											<th scope="col">Estado</th>
-											<th scope="col">Asignatura</th>
-											<th scope="col">Ciudad</th>
-											<th scope="col">Correo</th>
-											<th scope="col">Acciones</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="docente : ${docentes}">
-											<td th:text="${docente.id}"/>
-											<td th:text="${docente.nombre}"/>
-											<td th:text="${docente.apellido}"/>
-											<td th:text="${docente.identificacion}"/>
-											<td th:text="${docente.limitHoras}"/>
-											<td th:text="${docente.telefono}"/>
-											<td th:text="${docente.estado}"/>
-											<td th:text="${docente.ciudad}"/>
-											<td th:text="${docente.correo}"/>
-											
-									
-																				
-											<td><a href="#"><i class="fas fa-edit"></i></a> | <a
-												href="#"><i class="fas fa-user-times"></i></a></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+							<div th:include="docente/list.html" th:remove="tag"></div>
 
 						</div>
 					</div>
@@ -115,72 +77,7 @@
 							<h4>Registro de docente </h4>
 						</div>
 						<div class="card-body">
-							<form class="form" role="form" th:object="${docente}" method="post" autocomplete="off">
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Nombres
-										</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text" name="Nombres" id="nombre" required="required" placeholder="tu nombre...">
-										
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Apellidos
-										</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Identificación</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Limite de horas</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Telefono</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Estado</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Asignatura</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Ciudad</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group row">
-									<label class="col-lg-3 col-form-label form-control-label">Correo</label>
-									<div class="col-lg-9">
-										<input class="form-control" type="email">
-									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-lg-12 text-center">
-										<input type="reset" class="btn btn-secondary" value="Cancelar">
-										<input type="button" class="btn btn-primary"
-											value="Guardar">
-									</div>
-								</div>
-							</form>
+							<div th:include="docente/nuevo.html" th:href="@{/nuevo}" th:remove="tag"></div>
 						</div>
 					</div>
 				</div>

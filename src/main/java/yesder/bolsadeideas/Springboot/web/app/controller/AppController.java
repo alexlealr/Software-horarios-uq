@@ -44,18 +44,26 @@ public class AppController {
 	}
 
 
+<<<<<<< HEAD
 	@GetMapping("/docente-form")
 	//@RequestMapping(value="/docente-form", method = RequestMethod.GET)
     public String listaUsuarios(ModelMap mp){
         mp.put("docentes", uc.findAll());
         return "docente/docente-form";
     }
+=======
+
+>>>>>>> 6212b2f94e9e6d08543ec2aa654effc3d2e124af
 //	@GetMapping("/asignatura-form")
 //	public String getAsiganturaForm(Model model) {
 //		model.addAttribute("asignaturaList", asignaService.getAllUsers());
 //		return "asignatura/asignatura-form";
 //	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6212b2f94e9e6d08543ec2aa654effc3d2e124af
 
 //	@GetMapping("/docente-form")
 //	public String getDocenteForm() {

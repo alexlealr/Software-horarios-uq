@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,7 @@ public class ControladorCrudDocente {
         mp.addAttribute("docentes", uc.findAll());
         return "docente/docente-form";
     }
+	
 	//@GetMapping("/docente-form")
 //	@RequestMapping(value="/docente-form", method = RequestMethod.GET)
 //	@ResponseBody
@@ -39,27 +41,34 @@ public class ControladorCrudDocente {
 //        return "docente/docente-form";
 //    }
 // 
-//    @RequestMapping(value="/docente-form", method=RequestMethod.GET)
-//    public String nuevo(ModelMap mp){
-//        mp.put("docente", new Docente());
-//        return "/docente-form";
-//    }
+	@RequestMapping(value="/nuevo", method=RequestMethod.GET)
+    public String nuevo(ModelMap mp, BindingResult bindingResult){
+		 
+        mp.addAttribute("docente", new Docente());
+        
+        return "docente/docente-form";
+    }
    
 //   // @RequestMapping(value="", method = RequestMethod.GET)
 //	public String getDocenteForm(ModelMap mp) {
 //		return listaUsuarios(mp);
 //	}
-//    @RequestMapping(value="/docente-form", method=RequestMethod.POST)
-//    public String crear(@Valid Docente docente,
-//            BindingResult bindingResult, ModelMap mp){
-//        if(bindingResult.hasErrors()){
-//            return "docente/docente-form";
-//        }else{
-//            uc.save(docente);
-//            mp.put("docente", docente);
-//            return "docente/docente-form";
-//        }
-//    }
+    @RequestMapping(value="/docente-form", method=RequestMethod.POST)
+    public String crear(@Valid Docente docente, BindingResult bindingResult, ModelMap mp){
+        if(bindingResult.hasErrors()){
+            return "docente/docente-form";
+        }else{
+            uc.save(docente);
+            mp.addAttribute("docente", docente);
+            return listaUsuarios(mp);
+        }
+    }
+    @RequestMapping(value="/borrar/{id}", method=RequestMethod.GET)
+    public String borrar(@PathVariable("id") long id, ModelMap mp){
+        uc.deleteById(id);
+        mp.addAttribute("usuarios", uc.findAll());
+        return "docente/docente-form";
+    }
 // 
 //    @RequestMapping(value="/docente-form", method = RequestMethod.POST)
 //    public String creado(@RequestParam("docente") Docente docente){
