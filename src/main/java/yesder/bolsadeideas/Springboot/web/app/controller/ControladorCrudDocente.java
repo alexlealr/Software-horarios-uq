@@ -2,6 +2,8 @@
  * 
  */
 package yesder.bolsadeideas.Springboot.web.app.controller;
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,8 +68,34 @@ public class ControladorCrudDocente {
     @RequestMapping(value="/borrar/{id}", method=RequestMethod.GET)
     public String borrar(@PathVariable("id") long id, ModelMap mp){
         uc.deleteById(id);
-        mp.addAttribute("usuarios", uc.findAll());
+        mp.addAttribute("docentes", uc.findAll());
         return "docente/docente-form";
+    }
+    @RequestMapping(value="/editar/{id}", method=RequestMethod.GET)
+    public String editar(@PathVariable("id") long id, ModelMap mp){
+        mp.addAttribute("docente", uc.findById(id).get());
+        return "docente/editar";
+    }
+     
+    @RequestMapping(value="/actualizar", method=RequestMethod.POST)
+    public String actualizar(@Valid Docente docente, BindingResult bindingResult, ModelMap mp){
+        if(bindingResult.hasErrors()){
+            mp.addAttribute("docentes", uc.findAll());
+        return "docente/docente-form";
+        }
+        Long id = docente.getId(); 
+        Docente user = uc.findById(id).get();
+        user.setNombre(docente.getNombre());
+        user.setApellido(docente.getApellido());
+        user.setCiudad(docente.getCiudad());
+        user.setCorreo(docente.getCorreo());
+        user.setEstado(docente.getEstado());
+        user.setIdentificacion(docente.getIdentificacion());
+        user.setLimitHoras(docente.getLimitHoras());
+        user.setTelefono(docente.getTelefono());
+        uc.save(user);
+        mp.addAttribute("usuario", user);
+        return "docente/actualizado";
     }
 // 
 //    @RequestMapping(value="/docente-form", method = RequestMethod.POST)
