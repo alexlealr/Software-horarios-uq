@@ -1,4 +1,5 @@
-	<form class="form" role="form" autocomplete="off" th:object="${asignaturaForm}" th:action="@{/asignaturaForm}" method="post">
+	<form class="form" role="form" autocomplete="off" th:object="${asignaturaForm}" th:action="${editMode} ?@{/editAsignatura} :@{/asignaturaForm}" method="post">
+		<input class="form-control" type=hidden th:field="${asignaturaForm.id}"  th:if="${editMode}">
 		<div class="form-group row">
 			<label class="col-lg-3 col-form-label form-control-label">Codigo
 			</label>
@@ -62,8 +63,8 @@
 		</div>
 		<div class="form-group row">
 			<div class="col-lg-12 text-center">
-				<input type="reset" class="btn btn-secondary" value="Cancelar">
-				<input type="submit" class="btn btn-primary" value="Guardar">
+			    <a class="btn btn-secondary"  th:href="@{'/editAsignatura/cancel'}">Cancelar</a>
+				<input type="submit" class="btn btn-primary" value="Guardar" th:value="${editMode}?'Actualizar':'Registrar'">
 			</div>
 		</div>
 		<div class="alert alert-danger text-center" th:if="${formErrorMessage}" th:text="${formErrorMessage}">Error MEssage</div>

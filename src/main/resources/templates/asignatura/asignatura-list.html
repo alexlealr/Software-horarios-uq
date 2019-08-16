@@ -6,13 +6,13 @@
 		<thead class="thead-light">
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col">Código</th>
+				<th scope="col">Codigo</th>
 				<th scope="col">Nombre</th>
 				<th scope="col">Nivel</th>
 				<th scope="col">Tipo de asignatura</th>
 				<th scope="col">Unidades</th>
 				<th scope="col">¿Activa?</th>
-				<th scope="col">Opción de grado</th>
+				<th scope="col">Opcion de grado</th>
 				<th scope="col">Tipo de actividad</th>
 				<th scope="col">Acciones</th>
 				<th></th>
@@ -30,12 +30,23 @@
 				<td th:text="${asignatura.opcionGrado}"/>
 				<td th:text="${asignatura.tipoAct}"/>
 
-				<td><a href="#" th:href="@{'/editAsig/'+ ${asignatura.id}}"><i
-						class="fas fa-edit"></i></a> | <a href="#"
-					th:onclick="'javascript:confirmDelete(\''+${asignatura.id} +'\');'"><i
-						class="fas fa-user-times"></i></a></td>
+				<td><a href="#" th:href="@{'/editAsignatura/'+ ${asignatura.id}}"><i class="fas fa-edit"></i></a>
+				 | <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${asignatura.id} +'\');'"><i class="fas fa-user-times"></i></a>
+				 </td>
 			</tr>
 		</tbody>
 	</table>
+	<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
 </div>
+ 
+<script type="text/javascript">
+function confirmDelete(id){
+	$('#deleteModal').modal('show');
+	$("#asignaturaIdHiddenInput").val(id);
+}
+function deleteAsignatura(){
+	var id = $("#asignaturaIdHiddenInput").val();
+    window.location = "deleteAsignatura/"+id;
+}
+</script>
 </html>

@@ -8,9 +8,10 @@ public interface AsignaturaService {
 	
 	public Asignatura createAsignatura(Asignatura asig) throws Exception;
 	
-	public Asignatura getAsignaturaByCod(String cod) throws Exception;
+	public Asignatura getAsignaturaById(Long id) throws Exception;
 
 	public Asignatura updateAsignatura(Asignatura asig) throws Exception;
 		
+	public void deleteAsignatura(Long id) throws Exception;
 	
 }
