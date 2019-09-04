@@ -45,15 +45,6 @@ public class AppController {
 
 
 
-	@GetMapping("/docente-form")
-	//@RequestMapping(value="/docente-form", method = RequestMethod.GET)
-    public String listaUsuarios(ModelMap mp){
-        mp.put("docentes", uc.findAll());
-        return "docente/docente-form";
-    }
-
-
-
 
 //	@GetMapping("/docente-form")
 //	public String getDocenteForm() {
