@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="table-responsive">
+	<table id="prestamoList"
+		class="table table-bordered table-hover table-striped">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Nombre del libro</th>
+				<th scope="col">Cedula usuario</th>
+				<th scope="col">Descripcion</th>
+				<th scope="col">Estado</th>
+				<th scope="col">Fecha de prestamo</th>
+				<th scope="col">Fecha de entrega</th>
+				<th scope="col">Dias prestado</th>
+				<th scope="col">Acciones</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="prestamo: ${prestamoList}">
+				<td th:text="${prestamo.id}"/>
+				<td th:text="${prestamo.codigoLibro.getNombre()}"/>
+				<td th:text="${prestamo.identi.getCodigo()}"/>
+				<td th:text="${prestamo.descripcion}"/>
+				<td th:text="${prestamo.estado}"/>
+				<td th:text="${prestamo.fechaPrestamo}"/>
+				<td th:text="${prestamo.fechaEntrega}"/>
+				<td th:text="${prestamo.diasCalculados()}"/>
+
+				<td><a href="#" th:href="@{'/editPrestamo/'+ ${prestamo.id}}"><i class="fas fa-edit"></i></a>
+				 | <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${prestamo.id} +'\');'"><i class="fas fa-user-times"></i></a>
+				 </td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
+</div>
+ 
+<script type="text/javascript">
+function confirmDelete(id){
+	$('#deleteModal').modal('show');
+	$("#prestamoIdHiddenInput").val(id);
+}
+function deletePrestamo(){
+	var id = $("#prestamoIdHiddenInput").val();
+    window.location = "deletePrestamo/"+id;
+}
+</script>
+</html>

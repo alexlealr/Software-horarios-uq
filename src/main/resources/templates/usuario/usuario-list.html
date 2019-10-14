@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="table-responsive">
+	<table id="usuarioList"
+		class="table table-bordered table-hover table-striped">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Codigo</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Telefono</th>
+				<th scope="col">Edad</th>
+				<th scope="col">Rol</th>
+				<th scope="col">Username</th>
+				<th scope="col">Password</th>
+				<th scope="col">Acciones</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="usuario: ${usuarioList}">
+				<td th:text="${usuario.id}"/>
+				<td th:text="${usuario.codigo}"/>
+				<td th:text="${usuario.nombre}"/>
+				<td th:text="${usuario.apellido}"/>
+				<td th:text="${usuario.correo}"/>
+				<td th:text="${usuario.telefo}"/>
+				<td th:text="${usuario.edad}"/>
+				<td th:text="${usuario.role}"/>
+				<td th:text="${usuario.username}"/>
+				<td th:text="${usuario.password}"/>
+				<td><a href="#" th:href="@{'/editUsuario/'+ ${usuario.id}}"><i class="fas fa-edit"></i></a>
+				 | <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${usuario.id} +'\');'"><i class="fas fa-user-times"></i></a>
+				 </td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
+</div>
+ 
+<script type="text/javascript">
+function confirmDelete(id){
+	$('#deleteModal').modal('show');
+	$("#usuarioIdHiddenInput").val(id);
+}
+function deleteUsuario(){
+	var id = $("#usuarioIdHiddenInput").val();
+    window.location = "deleteUsuario/"+id;
+}
+</script>
+</html>

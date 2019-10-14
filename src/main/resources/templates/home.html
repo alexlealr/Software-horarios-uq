@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<title>W3.CSS Template</title>
+<title>Horarios</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -10,105 +10,39 @@
 
 <!-- Sidebar on click -->
 
-
-<!-- Navbar -->
+<header th:fragment="header">
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-teal"><i class="fa fa-home w3-margin-right"></i>ADMINISTRACIÓN FINANCIERA</a>
+  <a href="#" class="w3-bar-item w3-button w3-teal"><i class="fa fa-home w3-margin-right"></i>Biblioteca municipal</a>
      
-      <a href="#team" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Equipo</a>
-     <a th:href="@{/docente-form}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Docentes</a>  
+      <a th:href="@{/libroForm}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Libros</a>
+      <a th:href="@{/prestamoForm}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Prestamos</a>  
    
-   
-     
-     <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button" title="Notifications">Plan 302 <i class="fa fa-caret-down"></i></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-      <a th:href="@{/asignaturaForm}" class="w3-bar-item w3-button">Registrar asignaturas</a>
-      <a href="#" class="w3-bar-item w3-button">Registrar fechas</a>
-      <a href="#" class="w3-bar-item w3-button">Link</a>
-    </div>
-    </div>
-      <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button" title="Notifications">Plan 318 <i class="fa fa-caret-down"></i></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-      <a th:href="@{/asignaturaForm}" class="w3-bar-item w3-button">Registrar asignaturas</a>
-      <a th:href="@{/fechas318_302}" class="w3-bar-item w3-button">Registrar fechas</a>
-      <a href="#" class="w3-bar-item w3-button">Link</a>
-    </div>
-    </div>
-      <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button" title="Notifications">Plan 650 <i class="fa fa-caret-down"></i></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-      <a th:href="@{/asignaturaForm}" class="w3-bar-item w3-button">Registrar asignaturas</a>
-      <a th:href="@{/fechas650}" class="w3-bar-item w3-button">Registrar fechas</a>
-      <a href="#" class="w3-bar-item w3-button">Link</a>
-    </div>
-    </div>
-     <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button" title="Notifications">Genenar horario <i class="fa fa-caret-down"></i></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block">
-      <a href="#" class="w3-bar-item w3-button">Link</a>
-      <a href="#" class="w3-bar-item w3-button">Link</a>
-      <a href="#" class="w3-bar-item w3-button">Link</a>
-    </div>
-    </div>
-  <a href="#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contactanos</a>
+      <a th:href="@{/categoriaForm}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Categorias</a>
+      <a th:href="@{/usuarioForm}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Usuarios</a>
+      <a th:href="@{/login}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Login</a>
+      <a href="#" th:href="@{/logout}" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Cerrar sesion</a>				   	
+  
 
  </div>
-
+ </div>
+</header>
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
     <a href="#team" class="w3-bar-item w3-button">Equipo</a>
     <a th:href="@{/docente-form}" class="w3-bar-item w3-button">Docentes</a>
-    <a th:href="@{/asignatura-form}" class="w3-bar-item w3-button">Asignaturas</a>
+    <a th:href="@{/libro-form}" class="w3-bar-item w3-button">Asignaturas</a>
     <a href="#work" class="w3-bar-item w3-button">Fechas</a>
     <a href="#pricing" class="w3-bar-item w3-button">Generar horario</a>
     <a href="#contact" class="w3-bar-item w3-button">Contactanos</a>
   </div>
-</div>
+
 
 <!-- Image Header -->
 <div class="w3-display-container w3-animate-opacity">
-  <img src="/img/uq2.jpeg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+  <img src="/img/biblio.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
  
-</div>
-
-
-
-<!-- Team Container -->
-<div class="w3-container w3-padding-64 w3-center" id="team">
-<h2>Nuestro equipo</h2>
-
-
-<div class="w3-row"><br>
-
-<div class="w3-quarter">
-  <img src="" alt="" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3></h3>
-  <p></p>
-</div>
-
-<div class="w3-quarter">
-  <img src="/img/alex.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3>Alexander Leal</h3>
-  <p>Ingeniero de sistemas y computación</p>
-</div>
-
-<div class="w3-quarter">
-  <img src="/img/meliza.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3>Meliza Vélasquez</h3>
-  <p>Ingeniera de sistemas y computación</p>
-</div>
-
-<div class="w3-quarter">
-  <img src="" alt="" style="width:45%" class="w3-circle w3-hover-opacity">
-  <h3></h3>
-  <p></p>
-</div>
-
-</div>
 </div>
 
 

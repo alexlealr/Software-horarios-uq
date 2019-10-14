@@ -1,5 +1,5 @@
 body{
-    background: url(../img/uq2.jpeg) no-repeat center center fixed;
+    background: url(../img/biblio.jpg) no-repeat center center fixed;
     background-size: cover;
 }
 
@@ -8,7 +8,9 @@ body{
     margin-top:25%;
     padding: 0;
 }
-
+.blanco{
+	color: white;
+}
 .modal-content{
     background-color: #3b4652;
     opacity: .85;
