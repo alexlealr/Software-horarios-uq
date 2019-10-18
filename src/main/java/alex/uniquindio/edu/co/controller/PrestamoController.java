@@ -14,27 +14,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import alex.uniquindio.edu.co.entity.Prestamo;
 import alex.uniquindio.edu.co.repository.LibroRepository;
-import alex.uniquindio.edu.co.repository.PrestamoRepository;
 import alex.uniquindio.edu.co.repository.UsuarioRepository;
 import alex.uniquindio.edu.co.service.PrestamoService;
 
-
+/**
+ * Clase controlador que permite redireccionar a los formulario del crud
+ * prestamo y de igual forma realizar su crud en la base de datos
+ * 
+ * @author alexander leal
+ *
+ */
 @Controller
 public class PrestamoController {
 
 	
-
+	/**
+	 * Servicio prestamo en el cual se encuentran los metodos pertinentes al crud
+	 * de prestamo
+	 */
 	@Autowired
 	PrestamoService UsuarioService;
 	
+	/**
+	 * Repositorio libro en el cual se puede acceder a los datos del libro 
+	 * sin pasar por las otras capas
+	 */
 	@Autowired
 	LibroRepository libroRepository;
 	
+	/**
+	 * Repositorio usuario en el cual se puede acceder a los datos del usuario 
+	 * sin pasar por las otras capas
+	 */
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
-	
-
+	/**
+	 * Permite cargar el formulario de registro del prestamo
+	 * @param model
+	 * @return formulario prestamo
+	 */
 	@GetMapping("/prestamoForm")
 	public String PrestamoForm(Model model) {
 		model.addAttribute("prestamoForm", new Prestamo());
@@ -44,7 +63,14 @@ public class PrestamoController {
 		model.addAttribute("listTab","active");
 		return "prestamo/prestamo-view";
 	}
-
+	 /**
+     * Permite crear el prestamo de acuerdo a los datos ingresado por 
+     * el usuario
+     * @param asig Entidad prestamo
+     * @param result 
+     * @param model
+     * @return formulario prestamo
+     */
 	@PostMapping("/prestamoForm")
 	public String createPrestamo(@Valid @ModelAttribute("prestamoForm")Prestamo asig, BindingResult result, ModelMap model) {
 		if (result.hasErrors()) {
@@ -69,7 +95,13 @@ public class PrestamoController {
 	    	return "prestamo/prestamo-view";
 	}
 	
-	
+	/**
+	 * Setea los datos del prestamo que el usuario selecciona para editar
+	 * @param model
+	 * @param id variable para identificar el prestamo seleccionada
+	 * @return formuario prestamo
+	 * @throws Exception
+	 */
 	@GetMapping("/editPrestamo/{id}")
 	public String getEditPrestamoForm(Model model, @PathVariable(name ="id")Long id)throws Exception{
 		Prestamo asigToEdit = UsuarioService.getPrestamoById(id);
@@ -82,7 +114,13 @@ public class PrestamoController {
 		return "prestamo/prestamo-view";
 	}
 	
-
+	 /**
+     * Permite editar el prestamo que el usuario seleccione
+     * @param asig Entidad prestamo
+     * @param result
+     * @param model
+     * @return formulario prestamo
+     */
 	@PostMapping("/editPrestamo")
 	public String postEditPrestamoForm(@Valid @ModelAttribute("prestamoForm")Prestamo asig, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
@@ -107,12 +145,22 @@ public class PrestamoController {
 		return "prestamo/prestamo-view";
 
 	}
-
+	/**
+     * Permite cancelar el prestamo que el usuario ha elegido para
+     * editar
+     * @param model
+     * @return formulario prestamo
+     */
 	@GetMapping("/editPrestamo/cancel")
 	public String cancelEditPrestamo(ModelMap model) {
 		return "redirect:/prestamoForm";
 	}
-	
+    /**
+     * permite eliminar el prestamo seleccionada
+     * @param model
+     * @param id del prestamo a eliminar
+     * @return formulario prestamo
+     */
 	@GetMapping("/deletePrestamo/{id}")
 	public String deletePrestamo(Model model, @PathVariable(name="id") Long id) {
 		try {

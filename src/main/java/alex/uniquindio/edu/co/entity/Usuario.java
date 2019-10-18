@@ -1,8 +1,7 @@
 package alex.uniquindio.edu.co.entity;
 
+import java.io.Serializable;
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +13,20 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
+/**
+ * Entidad usuarios
+ * @author alexander leal
+ *
+ */
 @Entity
-public class Usuario {
+public class Usuario implements Serializable  {
 	
 	
+	/**
+	 * serial de la entidad
+	 */
+	private static final long serialVersionUID = -1234939490119250296L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator="native")
 	@GenericGenerator(name="native", strategy="native")
@@ -51,6 +60,9 @@ public class Usuario {
 	@OneToMany(mappedBy= "identi")
     private List<Prestamo> presta;
 	
+	/**
+	 * Inicializa los atributos de la entidad usuario
+	 */
 	public Usuario() {
 		super();
 	}
@@ -134,6 +146,10 @@ public class Usuario {
 	}
 	public void setEdad(String dire) {
 		this.edad = dire;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	

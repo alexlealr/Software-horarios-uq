@@ -15,28 +15,30 @@
 		</thead>
 		<tbody>
 			<tr th:each="categoria: ${categoriaList}">
-				<td th:text="${categoria.id}"/>
-				<td th:text="${categoria.codigo}"/>
-				<td th:text="${categoria.nombre}"/>
-				<td th:text="${categoria.edad}"/>
+				<td th:text="${categoria.id}" />
+				<td th:text="${categoria.codigo}" />
+				<td th:text="${categoria.nombre}" />
+				<td th:text="${categoria.edad}" />
 
-				<td><a href="#" th:href="@{'/editCategoria/'+ ${categoria.id}}"><i class="fas fa-edit"></i></a>
-				 | <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${categoria.id} +'\');'"><i class="fas fa-user-times"></i></a>
-				 </td>
+				<td><a href="#" th:href="@{'/editCategoria/'+ ${categoria.id}}"><i
+						class="fas fa-edit"></i></a> | <a href="#"
+					th:onclick="'javascript:confirmDelete(\''+ ${categoria.id} +'\');'"><i
+						class="fas fa-user-times"></i></a></td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
+	<div class="alert alert-danger text-center" th:if="${listErrorMessage}"
+		th:text="${listErrorMessage}">Error MEssage</div>
 </div>
- 
+
 <script type="text/javascript">
-function confirmDelete(id){
-	$('#deleteModal').modal('show');
-	$("#categoriaIdHiddenInput").val(id);
-}
-function deleteCategoria(){
-	var id = $("#categoriaIdHiddenInput").val();
-    window.location = "deleteCategoria/"+id;
-}
+	function confirmDelete(id) {
+		$('#deleteModal').modal('show');
+		$("#categoriaIdHiddenInput").val(id);
+	}
+	function deleteCategoria() {
+		var id = $("#categoriaIdHiddenInput").val();
+		window.location = "deleteCategoria/" + id;
+	}
 </script>
 </html>

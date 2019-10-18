@@ -21,33 +21,35 @@
 		</thead>
 		<tbody>
 			<tr th:each="usuario: ${usuarioList}">
-				<td th:text="${usuario.id}"/>
-				<td th:text="${usuario.codigo}"/>
-				<td th:text="${usuario.nombre}"/>
-				<td th:text="${usuario.apellido}"/>
-				<td th:text="${usuario.correo}"/>
-				<td th:text="${usuario.telefo}"/>
-				<td th:text="${usuario.edad}"/>
-				<td th:text="${usuario.role}"/>
-				<td th:text="${usuario.username}"/>
-				<td th:text="${usuario.password}"/>
-				<td><a href="#" th:href="@{'/editUsuario/'+ ${usuario.id}}"><i class="fas fa-edit"></i></a>
-				 | <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${usuario.id} +'\');'"><i class="fas fa-user-times"></i></a>
-				 </td>
+				<td th:text="${usuario.id}" />
+				<td th:text="${usuario.codigo}" />
+				<td th:text="${usuario.nombre}" />
+				<td th:text="${usuario.apellido}" />
+				<td th:text="${usuario.correo}" />
+				<td th:text="${usuario.telefo}" />
+				<td th:text="${usuario.edad}" />
+				<td th:text="${usuario.role}" />
+				<td th:text="${usuario.username}" />
+				<td th:text="${usuario.password}" />
+				<td><a href="#" th:href="@{'/editUsuario/'+ ${usuario.id}}"><i
+						class="fas fa-edit"></i></a> | <a href="#"
+					th:onclick="'javascript:confirmDelete(\''+ ${usuario.id} +'\');'"><i
+						class="fas fa-user-times"></i></a></td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
+	<div class="alert alert-danger text-center" th:if="${listErrorMessage}"
+		th:text="${listErrorMessage}">Error MEssage</div>
 </div>
- 
+
 <script type="text/javascript">
-function confirmDelete(id){
-	$('#deleteModal').modal('show');
-	$("#usuarioIdHiddenInput").val(id);
-}
-function deleteUsuario(){
-	var id = $("#usuarioIdHiddenInput").val();
-    window.location = "deleteUsuario/"+id;
-}
+	function confirmDelete(id) {
+		$('#deleteModal').modal('show');
+		$("#usuarioIdHiddenInput").val(id);
+	}
+	function deleteUsuario() {
+		var id = $("#usuarioIdHiddenInput").val();
+		window.location = "deleteUsuario/" + id;
+	}
 </script>
 </html>

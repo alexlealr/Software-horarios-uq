@@ -13,98 +13,143 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import alex.uniquindio.edu.co.entity.Categoria;
-import alex.uniquindio.edu.co.entity.Libro;
 import alex.uniquindio.edu.co.service.CategoriaService;
-import alex.uniquindio.edu.co.service.LibroService;
 
+/**
+ * Clase controlador que permite redireccionar a los formulario del crud
+ * categoria y de igual forma realizar su crud en la base de datos
+ * 
+ * @author alexander leal
+ *
+ */
 @Controller
 public class CategoriaController {
 
+	/**
+	 * Servicio categoria en el cual se encuentran los metodos pertinentes al crud
+	 * de categoria
+	 */
 	@Autowired
-	CategoriaService libroService;
+	CategoriaService categoriaService;
 
+	/**
+	 * Permite cargar el formulario de registro de categoria
+	 * @param model
+	 * @return categoria/categoria-view formulario
+	 */
 	@GetMapping("/categoriaForm")
 	public String categoriaForm(Model model) {
 		model.addAttribute("categoriaForm", new Categoria());
-		model.addAttribute("categoriaList", libroService.getAllUsers());
-		model.addAttribute("listTab","active");
+		model.addAttribute("categoriaList", categoriaService.getAllUsers());
+		model.addAttribute("listTab", "active");
 		return "categoria/categoria-view";
 	}
-
+    /**
+     * Permite crear la categoria de acuerdo a los datos ingresado por 
+     * el usuario
+     * @param asig Entidad categoria
+     * @param result 
+     * @param model
+     * @return formulario categoria
+     */
 	@PostMapping("/categoriaForm")
-	public String createCategoria(@Valid @ModelAttribute("categoriaForm")Categoria asig, BindingResult result, ModelMap model) {
+	public String createCategoria(@Valid @ModelAttribute("categoriaForm") Categoria asig, BindingResult result,
+			ModelMap model) {
 		if (result.hasErrors()) {
 			model.addAttribute("categoriaForm", asig);
-			model.addAttribute("formTab","active");
-		}else {
-		   try {
-			libroService.createCategoria(asig);
-			model.addAttribute("categoriaForm", new Categoria());
-			model.addAttribute("listTab","active");
-		
-		} catch (Exception e) {
-			
-			model.addAttribute("formErrorMessage",e.getMessage());
-			model.addAttribute("categoriaForm", asig);
-			model.addAttribute("formTab","active");
-			model.addAttribute("userList", libroService.getAllUsers());
-		
+			model.addAttribute("formTab", "active");
+		} else {
+			try {
+				categoriaService.createCategoria(asig);
+				model.addAttribute("categoriaForm", new Categoria());
+				model.addAttribute("listTab", "active");
+
+			} catch (Exception e) {
+
+				model.addAttribute("formErrorMessage", e.getMessage());
+				model.addAttribute("categoriaForm", asig);
+				model.addAttribute("formTab", "active");
+				model.addAttribute("userList", categoriaService.getAllUsers());
+
+			}
 		}
-		}
-	    	model.addAttribute("categoriaList", libroService.getAllUsers());
-	    	return "categoria/categoria-view";
+		model.addAttribute("categoriaList", categoriaService.getAllUsers());
+		return "categoria/categoria-view";
 	}
-	
-	
+
+	/**
+	 * Setea los datos de la categoria que el usuario selecciona para editar
+	 * @param model
+	 * @param id variable para identificar la categoria seleccionada
+	 * @return formuario categoria
+	 * @throws Exception
+	 */
 	@GetMapping("/editCategoria/{id}")
-	public String getEditCategoriaForm(Model model, @PathVariable(name ="id")Long id)throws Exception{
-		Categoria asigToEdit = libroService.getCategoriaById(id);
+	public String getEditCategoriaForm(Model model, @PathVariable(name = "id") Long id) throws Exception {
+		Categoria asigToEdit = categoriaService.getCategoriaById(id);
 
 		model.addAttribute("categoriaForm", asigToEdit);
-		model.addAttribute("categoriaList", libroService.getAllUsers());
-		model.addAttribute("formTab","active");
-		model.addAttribute("editMode","true");
+		model.addAttribute("categoriaList", categoriaService.getAllUsers());
+		model.addAttribute("formTab", "active");
+		model.addAttribute("editMode", "true");
 
 		return "categoria/categoria-view";
 	}
-	
-
+    /**
+     * Permite editar la categoria que el usuario seleccione
+     * @param asig Entidad categoria
+     * @param result
+     * @param model
+     * @return formulario categoria
+     */
 	@PostMapping("/editCategoria")
-	public String postEditCategoriaForm(@Valid @ModelAttribute("categoriaForm")Categoria asig, BindingResult result, ModelMap model) {
-		if(result.hasErrors()) {
+	public String postEditCategoriaForm(@Valid @ModelAttribute("categoriaForm") Categoria asig, BindingResult result,
+			ModelMap model) {
+		if (result.hasErrors()) {
 			model.addAttribute("categoriaForm", asig);
-			model.addAttribute("formTab","active");
-			model.addAttribute("editMode","true");
-		}else {
+			model.addAttribute("formTab", "active");
+			model.addAttribute("editMode", "true");
+		} else {
 			try {
-				libroService.updateCategoria(asig);
+				categoriaService.updateCategoria(asig);
 				model.addAttribute("categoriaForm", new Categoria());
-				model.addAttribute("listTab","active");
+				model.addAttribute("listTab", "active");
 			} catch (Exception e) {
-				model.addAttribute("formErrorMessage",e.getMessage());
+				model.addAttribute("formErrorMessage", e.getMessage());
 				model.addAttribute("categoriaForm", asig);
-				model.addAttribute("formTab","active");
-				model.addAttribute("categoriaList", libroService.getAllUsers());
-				model.addAttribute("editMode","true");
+				model.addAttribute("formTab", "active");
+				model.addAttribute("categoriaList", categoriaService.getAllUsers());
+				model.addAttribute("editMode", "true");
 			}
 		}
 
-		model.addAttribute("categoriaList", libroService.getAllUsers());
+		model.addAttribute("categoriaList", categoriaService.getAllUsers());
 		return "categoria/categoria-view";
 
 	}
-
+    /**
+     * Permite cancelar la categoria que el usuario ha elegido para
+     * editar
+     * @param model
+     * @return formulario categoria
+     */
 	@GetMapping("/editCategoria/cancel")
 	public String cancelEditCategoria(ModelMap model) {
 		return "redirect:/categoriaForm";
 	}
 	
+    /**
+     * permite eliminar la categoria seleccionada
+     * @param model
+     * @param id de la categoria a eliminar
+     * @return formulario categoria
+     */
 	@GetMapping("/deleteCategoria/{id}")
-	public String deleteCategoria(Model model, @PathVariable(name="id") Long id) {
+	public String deleteCategoria(Model model, @PathVariable(name = "id") Long id) {
 		try {
-			libroService.deleteCategoria(id);
+			categoriaService.deleteCategoria(id);
 		} catch (Exception e) {
-			model.addAttribute("Error de eliminacion","La asignatura no puede ser eliminada");
+			model.addAttribute("Error de eliminacion", "La asignatura no puede ser eliminada");
 		}
 		return categoriaForm(model);
 	}

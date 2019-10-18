@@ -12,37 +12,41 @@
 				<th scope="col">Categoria</th>
 				<th scope="col">Portada</th>
 				<th scope="col">Acciones</th>
-				
+
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="libro: ${libroList}">
-				<td th:text="${libro.id}"/>
-				<td th:text="${libro.codigo}"/>
-				<td th:text="${libro.nombre}"/>
-				<td th:text="${libro.categ.getNombre()}"/>
-				<td th:text="${libro.descripcion}"/>
-				<td><img class="img-thumbnail rounded float-left" style="max-width:25%;" th:src="@{'/uploads/'+${libro.imagen}}" th:alt="${libro.imagen}"/></td>
-		
+				<td th:text="${libro.id}" />
+				<td th:text="${libro.codigo}" />
+				<td th:text="${libro.nombre}" />
+				<td th:text="${libro.categ.getNombre()}" />
+				<td th:text="${libro.descripcion}" />
+				<td><img class="img-thumbnail rounded float-left"
+					style="max-width: 25%;" th:src="@{'/uploads/'+${libro.imagen}}"
+					th:alt="${libro.imagen}" /></td>
 
-				<td><a href="#" th:href="@{'/editLibro/'+ ${libro.id}}"><i class="fas fa-edit"></i></a>
-				 | <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${libro.id} +'\');'"><i class="fas fa-user-times"></i></a>
-				 </td>
+
+				<td><a href="#" th:href="@{'/editLibro/'+ ${libro.id}}"><i
+						class="fas fa-edit"></i></a> | <a href="#"
+					th:onclick="'javascript:confirmDelete(\''+ ${libro.id} +'\');'"><i
+						class="fas fa-user-times"></i></a></td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
+	<div class="alert alert-danger text-center" th:if="${listErrorMessage}"
+		th:text="${listErrorMessage}">Error MEssage</div>
 </div>
- 
+
 <script type="text/javascript">
-function confirmDelete(id){
-	$('#deleteModal').modal('show');
-	$("#libroIdHiddenInput").val(id);
-}
-function deleteLibro(){
-	var id = $("#libroIdHiddenInput").val();
-    window.location = "deleteLibro/"+id;
-}
+	function confirmDelete(id) {
+		$('#deleteModal').modal('show');
+		$("#libroIdHiddenInput").val(id);
+	}
+	function deleteLibro() {
+		var id = $("#libroIdHiddenInput").val();
+		window.location = "deleteLibro/" + id;
+	}
 </script>
 </html>

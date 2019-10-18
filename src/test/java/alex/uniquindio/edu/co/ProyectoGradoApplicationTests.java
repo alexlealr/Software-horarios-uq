@@ -1,4 +1,4 @@
-package yesder.bolsadeideas.Springboot.web.app;
+package alex.uniquindio.edu.co;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

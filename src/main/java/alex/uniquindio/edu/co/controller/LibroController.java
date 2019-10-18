@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
-
-import javax.swing.JOptionPane;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +19,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import alex.uniquindio.edu.co.entity.Libro;
 import alex.uniquindio.edu.co.repository.CategoriaRepository;
-import alex.uniquindio.edu.co.repository.UsuarioRepository;
 import alex.uniquindio.edu.co.service.LibroService;
 
+
+/**
+ * Clase controlador que permite redireccionar a los formulario del crud
+ * libro y de igual forma realizar su crud en la base de datos
+ * 
+ * @author alexander leal
+ *
+ */
 @Controller
 public class LibroController {
 
+	/**
+	 * Servicio ibro en el cual se encuentran los metodos pertinentes al crud
+	 * de libro
+	 */
 	@Autowired
 	LibroService libroService;
-
+    
+	/**
+	 * Repositorio categoria en el cual se puede acceder a ciertas consultas
+	 * sin pasar por otras capas de categoria
+	 */
 	@Autowired
 	CategoriaRepository categoriaRepository;
 	
-	
+	/**
+	 * Permite cargar el formulario de registro de libro
+	 * @param model
+	 * @return libro/libro-view"
+	 */
 	@GetMapping("/libroForm")
 	public String libroForm(Model model) {
 		model.addAttribute("libroForm", new Libro());
@@ -47,7 +63,14 @@ public class LibroController {
 		model.addAttribute("listTab","active");
 		return "libro/libro-view";
 	}
-
+	/**
+     * Permite crear el libro de acuerdo a los datos ingresado por 
+     * el usuario
+     * @param asig Entidad libro
+     * @param result 
+     * @param model
+     * @return formulario libro
+     */
 	@PostMapping("/libroForm")
 	public String createLibro(@Valid @ModelAttribute("libroForm")Libro asig, BindingResult result, ModelMap model, @RequestParam("file") MultipartFile foto) {
 		if (!foto.isEmpty()) {
@@ -86,19 +109,14 @@ public class LibroController {
 	    	return "libro/libro-view";
 	}
 	
-	@GetMapping("/ver{id}")
-	public String ver(@PathVariable(value="id")Long id, Map<String, Object> model, RedirectAttributes flash) throws Exception {
-		JOptionPane.showMessageDialog(null,"entro");
-		Libro lib= libroService.getLibroById(id);
-		if (lib==null) {
-			flash.addFlashAttribute("Error", "El libro no existe en la base de datos");
-			return "redirect:/libro-list";
-		}
-		model.put("libro",lib);
-		model.put("titulo", lib.getNombre());
-		
-		return "redirect:/libro/ver";
-	}
+	
+	/**
+	 * Setea los datos del libro que el usuario selecciona para editar
+	 * @param model
+	 * @param id variable para identificar el libro seleccionado
+	 * @return formuario libro
+	 * @throws Exception
+	 */
 	@GetMapping("/editLibro/{id}")
 	public String getEditLibroForm(Model model, @PathVariable(name ="id")Long id)throws Exception{
 		Libro asigToEdit = libroService.getLibroById(id);
@@ -111,7 +129,13 @@ public class LibroController {
 		return "libro/libro-view";
 	}
 	
-
+	/**
+     * Permite editar el libro que el usuario seleccione
+     * @param asig Entidad libro
+     * @param result
+     * @param model
+     * @return formulario libro
+     */
 	@PostMapping("/editLibro")
 	public String postEditLibroForm(@Valid @ModelAttribute("libroForm")Libro asig, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
@@ -137,11 +161,23 @@ public class LibroController {
 
 	}
 
+	 /**
+     * Permite cancelar el que el usuario ha elegido para
+     * editar
+     * @param model
+     * @return formulario libro
+     */
 	@GetMapping("/editLibro/cancel")
 	public String cancelEditLibro(ModelMap model) {
 		return "redirect:/libroForm";
 	}
 	
+	  /**
+     * permite eliminar el seleccionada
+     * @param model
+     * @param id del libro a eliminar
+     * @return formulario libro
+     */
 	@GetMapping("/deleteLibro/{id}")
 	public String deleteLibro(Model model, @PathVariable(name="id") Long id) {
 		try {

@@ -11,17 +11,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
+/**
+ * Entidad prestamos de libros
+ * @author alexander leal
+ *
+ */
 @Entity
 public class Prestamo implements Serializable{
 
 	/**
-	 * 
+	 *serial de la entidad 
 	 */
 	private static final long serialVersionUID = 8377524303096827312L;
 
@@ -49,153 +51,80 @@ public class Prestamo implements Serializable{
 	@Column
 	private Date fechaEntrega;
 	
-	
+	/**
+	 * inicializa los datos de la entidad
+	 */
 	public Prestamo() {
 		super();
 	}
 
-
-    
-
-
-	public Prestamo(Long id, String cod, Usuario identi, Libro codigoLibro, @NotBlank Date fechaPrestamo, String estado,
-			String descripcion, Date fechaEntrega) {
-		super();
-		this.id = id;
-		this.identi = identi;
-		this.codigoLibro = codigoLibro;
-		this.fechaPrestamo = fechaPrestamo;
-		this.estado = estado;
-		this.descripcion = descripcion;
-		this.fechaEntrega = fechaEntrega;
-	
-	}
-
+	/**
+	 * metodo que calcula los dias de un libro prestado
+	 * @return dias prestado
+	 */
    public int diasCalculados() {
 	   int dias=(int) ((fechaEntrega.getTime()-fechaPrestamo.getTime())/86400000);
 	   return dias;
    }
 
-
 	public Long getId() {
 		return id;
 	}
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
-
-
 	public Usuario getIdenti() {
 		return identi;
 	}
-
-
-
-
 
 	public void setIdenti(Usuario identi) {
 		this.identi = identi;
 	}
 
-
-
-
-
 	public Libro getCodigoLibro() {
 		return codigoLibro;
 	}
-
-
-
-
 
 	public void setCodigoLibro(Libro codigoLibro) {
 		this.codigoLibro = codigoLibro;
 	}
 
-
-
-
-
 	public Date getFechaPrestamo() {
 		return fechaPrestamo;
 	}
-
-
-
-
 
 	public void setFechaPrestamo(Date fechaPrestamo) {
 		this.fechaPrestamo = fechaPrestamo;
 	}
 
-
-
-
-
 	public String getEstado() {
 		return estado;
 	}
-
-
-
-
 
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
-
-
-
-
 	public String getDescripcion() {
 		return descripcion;
 	}
-
-
-
-
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-
-
-
-
 	public Date getFechaEntrega() {
 		return fechaEntrega;
 	}
-
-
-
-
 
 	public void setFechaEntrega(Date fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
 
-
-
-
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-
-
-
-	
-	
 	
 }

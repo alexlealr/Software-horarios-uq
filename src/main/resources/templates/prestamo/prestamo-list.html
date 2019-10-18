@@ -19,32 +19,34 @@
 		</thead>
 		<tbody>
 			<tr th:each="prestamo: ${prestamoList}">
-				<td th:text="${prestamo.id}"/>
-				<td th:text="${prestamo.codigoLibro.getNombre()}"/>
-				<td th:text="${prestamo.identi.getCodigo()}"/>
-				<td th:text="${prestamo.descripcion}"/>
-				<td th:text="${prestamo.estado}"/>
-				<td th:text="${prestamo.fechaPrestamo}"/>
-				<td th:text="${prestamo.fechaEntrega}"/>
-				<td th:text="${prestamo.diasCalculados()}"/>
+				<td th:text="${prestamo.id}" />
+				<td th:text="${prestamo.codigoLibro.getNombre()}" />
+				<td th:text="${prestamo.identi.getCodigo()}" />
+				<td th:text="${prestamo.descripcion}" />
+				<td th:text="${prestamo.estado}" />
+				<td th:text="${prestamo.fechaPrestamo}" />
+				<td th:text="${prestamo.fechaEntrega}" />
+				<td th:text="${prestamo.diasCalculados()}" />
 
-				<td><a href="#" th:href="@{'/editPrestamo/'+ ${prestamo.id}}"><i class="fas fa-edit"></i></a>
-				 | <a href="#" th:onclick="'javascript:confirmDelete(\''+ ${prestamo.id} +'\');'"><i class="fas fa-user-times"></i></a>
-				 </td>
+				<td><a href="#" th:href="@{'/editPrestamo/'+ ${prestamo.id}}"><i
+						class="fas fa-edit"></i></a> | <a href="#"
+					th:onclick="'javascript:confirmDelete(\''+ ${prestamo.id} +'\');'"><i
+						class="fas fa-user-times"></i></a></td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="alert alert-danger text-center" th:if="${listErrorMessage}" th:text="${listErrorMessage}">Error MEssage</div>
+	<div class="alert alert-danger text-center" th:if="${listErrorMessage}"
+		th:text="${listErrorMessage}">Error MEssage</div>
 </div>
- 
+
 <script type="text/javascript">
-function confirmDelete(id){
-	$('#deleteModal').modal('show');
-	$("#prestamoIdHiddenInput").val(id);
-}
-function deletePrestamo(){
-	var id = $("#prestamoIdHiddenInput").val();
-    window.location = "deletePrestamo/"+id;
-}
+	function confirmDelete(id) {
+		$('#deleteModal').modal('show');
+		$("#prestamoIdHiddenInput").val(id);
+	}
+	function deletePrestamo() {
+		var id = $("#prestamoIdHiddenInput").val();
+		window.location = "deletePrestamo/" + id;
+	}
 </script>
 </html>
